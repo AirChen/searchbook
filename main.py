@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-  
 
 from bs4 import BeautifulSoup
-import urllib2
+import urllib.request
+import urllib.error
+import ssl
 
 if __name__ == '__main__':
-    c = urllib2.urlopen('https://github.com/ruanyf/weekly/blob/master/README.md')
+    ssl._create_default_https_context = ssl._create_unverified_context
+    c = urllib.request.urlopen('https://github.com/ruanyf/weekly/blob/master/README.md')
     soup = BeautifulSoup(c.read(), "html.parser")
     en_list = soup.find_all('a')
     
